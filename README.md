@@ -15,8 +15,9 @@ Before you start, make sure you have the following installed:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-repo/review-service.git
-    cd review-service
+    git clone git@github.com:dnaroid/test-be.git
+    cd test-be
+    cp .sample-env .env
     ```
 
 2. Install dependencies:
