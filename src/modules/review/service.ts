@@ -1,4 +1,5 @@
 import prisma from "../../prisma"
+import {Prisma} from "@prisma/client"
 import {Review, SearchParams} from "./model"
 
 
@@ -7,13 +8,14 @@ export const createReview = (data: Review) => {
 }
 
 export const getReviews = (params: SearchParams) => {
-  const {take = 10, skip = 0, author, rating} = params
-  const where: { author?: string, rating?: number } = {}
+  const {take = 10, skip = 0, author, rating, title} = params
+  const where: Prisma.ReviewWhereInput = {}
 
-  if (author) where.author = author
-  if (rating) where.rating = +rating
+  if (!!author && !!author.trim()) where.author = author
+  if (!!rating) where.rating = +rating
+  if (!!title && title.trim()) where.title = {contains: title}
 
-  return prisma.review.findMany({take: +take, skip: +skip, where})
+  return prisma.review.findMany({take: +take, skip: +skip, where, orderBy: {createdAt: "asc"}})
 }
 
 export const getReviewById = (id: number) => {
