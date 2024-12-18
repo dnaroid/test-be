@@ -86,7 +86,7 @@ To start the development server:
    }
    ```
 
-## Delete a review
+### Delete a review
 
 - DELETE /reviews/:id
 
