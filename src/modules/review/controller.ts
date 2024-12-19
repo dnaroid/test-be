@@ -28,7 +28,9 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/authors", async (req: Request, res: Response) => {
   try {
     const authors = await getReviewsAuthors()
-    res.status(200).json(authors.map((author) => author.author))
+    res.status(200).json(
+      authors.map((author) => author.author).sort()
+    )
   } catch (error) {
     res.status(500).json({error: "Failed to fetch authors", details: error})
   }

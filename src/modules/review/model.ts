@@ -11,6 +11,6 @@ export type SearchParams = {
   take?: string
   skip?: string
   author?: string
-  rating?: string
+  rating?: number
   title?: string
 }
