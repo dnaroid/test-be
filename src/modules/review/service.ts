@@ -29,6 +29,7 @@ export const getReviewById = (id: number) => {
 }
 
 export const updateReview = (id: number, data: Review) => {
+  data.rating = +data.rating
   return prisma.review.update({where: {id}, data})
 }
 
