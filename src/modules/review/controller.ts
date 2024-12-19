@@ -1,5 +1,5 @@
 import express, {Request, Response} from "express"
-import {createReview, deleteReview, getReviewById, getReviews, updateReview} from "./service"
+import {createReview, deleteReview, getReviewById, getReviews, getReviewsAuthors, updateReview} from "./service"
 import {validateReviewMiddleware} from "./middleware"
 import {SearchParams} from "./model"
 
@@ -22,6 +22,15 @@ router.get("/", async (req: Request, res: Response) => {
     res.status(200).json(reviews)
   } catch (error) {
     res.status(500).json({error: "Failed to fetch reviews", details: error})
+  }
+})
+
+router.get("/authors", async (req: Request, res: Response) => {
+  try {
+    const authors = await getReviewsAuthors()
+    res.status(200).json(authors.map((author) => author.author))
+  } catch (error) {
+    res.status(500).json({error: "Failed to fetch authors", details: error})
   }
 })
 

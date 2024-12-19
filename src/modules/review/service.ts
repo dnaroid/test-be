@@ -18,6 +18,10 @@ export const getReviews = (params: SearchParams) => {
   return prisma.review.findMany({take: +take, skip: +skip, where, orderBy: {createdAt: "asc"}})
 }
 
+export const getReviewsAuthors = () => {
+  return prisma.review.findMany({select: {author: true}, distinct: ["author"]})
+}
+
 export const getReviewById = (id: number) => {
   return prisma.review.findUnique({where: {id}})
 }
