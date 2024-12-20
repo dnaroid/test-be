@@ -14,10 +14,15 @@ export const getReviews = (params: SearchParams) => {
   const where: Prisma.ReviewWhereInput = {}
 
   if (!!author && !!author.trim()) where.author = author
-  if (!!rating) where.rating = rating
+  if (!!rating) where.rating = +rating
   if (!!title && title.trim()) where.title = {contains: title}
 
-  return prisma.review.findMany({take: +take, skip: +skip, where, orderBy: {createdAt: "asc"}})
+  return prisma.review.findMany({
+    take: +take,
+    skip: +skip,
+    where,
+    orderBy: {id: "desc"}
+  })
 }
 
 export const getReviewsAuthors = () => {
